@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main( int argc, char * argv[] ) {
+    
+    argc--;   argv++;
+    
+    if ( argc == 0 ) {
+        printf( "Usage: sample filename\n" );
+        exit( 0 );
+    }
+    
+    FILE * inputFile = fopen( argv[0], "r" );
+    if ( inputFile == NULL ) {
+        printf( "Cannot open file %s\n", argv[0] );
+        exit( -1 );
+    }
+    
+    while ( ! feof( inputFile ) ) {
+        int theCurrentChar;
+        printf( "Appuyez sur <ENTER> pour lire le prochain caractère du fichier");
+        fflush( stdin );
+        fgetc( stdin );
+        
+        theCurrentChar = fgetc( inputFile );
+        printf( "Le caractère actuel est <<%c>>\n", theCurrentChar );
+    }
+
+    fclose( inputFile );
+        
+    return 0;
+}
